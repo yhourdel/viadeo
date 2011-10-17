@@ -1,5 +1,5 @@
 # encoding: utf-8
-require File.expand_path('../lib/linked_in/version', __FILE__)
+require File.expand_path('../lib/viadeo/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.add_dependency 'hashie', '~> 1.1.0'
@@ -21,5 +21,5 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
   gem.summary = gem.description
   gem.test_files = `git ls-files -- {test,spec,features}/*`.split("\n")
-  gem.version = LinkedIn::VERSION::STRING
+  gem.version = Viadeo::VERSION::STRING
 end
