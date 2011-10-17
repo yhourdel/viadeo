@@ -62,7 +62,7 @@ module Viadeo
           when 404
             raise Viadeo::Errors::NotFoundError, "(#{response.code}): #{response.message}"
           when 500
-            raise Viadeo::Errors::InformLinkedInError, "Viadeo had an internal error. Please let them know in the forum. (#{response.code}): #{response.message}"
+            raise Viadeo::Errors::InformViadeoError, "Viadeo had an internal error. Please let them know in the forum. (#{response.code}): #{response.message}"
           when 502..503
             raise Viadeo::Errors::UnavailableError, "(#{response.code}): #{response.message}"
           end

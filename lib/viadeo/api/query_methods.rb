@@ -21,7 +21,7 @@ module Viadeo
       private
 
         def simple_query(path, options={})
-          fields = options[:fields] || LinkedIn.default_profile_fields
+          fields = options[:fields] || Viadeo.default_profile_fields
 
           if options[:public]
             path +=":public"

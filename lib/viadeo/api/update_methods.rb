@@ -1,4 +1,4 @@
-module LinkedIn
+module Viadeo
   module Api
 
     module UpdateMethods
