@@ -1,6 +1,6 @@
 module Viadeo
   module Helpers
-    autoload :Authorization, "linked_in/helpers/authorization"
-    autoload :Request,       "linked_in/helpers/request"
+    autoload :Authorization, "viadeo/helpers/authorization"
+    autoload :Request,       "viadeo/helpers/request"
   end
 end

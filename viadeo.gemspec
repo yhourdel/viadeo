@@ -17,7 +17,7 @@ Gem::Specification.new do |gem|
   gem.email = ['wynn.netherland@gmail.com', 'josh.kalderimis@gmail.com']
   gem.files = `git ls-files`.split("\n")
   gem.homepage = 'http://github.com/pengwynn/linkedin'
-  gem.name = 'linkedin'
+  gem.name = 'viadeo'
   gem.require_paths = ['lib']
   gem.summary = gem.description
   gem.test_files = `git ls-files -- {test,spec,features}/*`.split("\n")

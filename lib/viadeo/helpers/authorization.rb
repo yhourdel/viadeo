@@ -3,14 +3,27 @@ module Viadeo
 
     module Authorization
 
-      DEFAULT_OAUTH_OPTIONS = {
-        :request_token_path => "/uas/oauth/requestToken",
-        :access_token_path  => "/uas/oauth/accessToken",
-        :authorize_path     => "/uas/oauth/authorize",
-        :api_host           => "https://api.linkedin.com",
-        :auth_host          => "https://www.linkedin.com"
-      }
+			def self.test_method()
+				"WORKLOOOL"
+			end
 
+			def grant_token(code, client_api_id, client_api_secret, redirect_uri)
+				url = "#{DEFAULT_OAUTH_OPTIONS[:token_url]}?code=#{code}&grant_type=authorization_code&client_id=#{client_api_id}&client_secret=#{client_api_secret}&response_type=code&redirect_uri=#{redirect_uri}"
+		    uri = URI.parse(url)
+		    connection = Net::HTTP.new(uri.host, 443)
+		 	  connection.use_ssl = true
+	 	   	connection.verify_mode = OpenSSL::SSL::VERIFY_NONE
+	 	   	resp = connection.request_get(uri.path + '?' + uri.query)
+	 	   	if resp.code != '200'
+	  	 		raise "web service error"
+		    end
+		    return resp.body
+			end
+
+			def authorize_link(client_api_id, redirect_uri)
+				"#{DEFAULT_OAUTH_OPTIONS[:authorize_url]}?display=popup&client_id=#{client_api_id}&response_type=code&redirect_uri=#{redirect_uri}"
+			end
+			
       def consumer
         @consumer ||= ::OAuth::Consumer.new(@consumer_token, @consumer_secret, parse_oauth_options)
       end

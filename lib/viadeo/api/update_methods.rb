@@ -2,7 +2,6 @@ module Viadeo
   module Api
 
     module UpdateMethods
-
       # def update_status(text)
       #   path = "/people/~/current-status"
       #   put(path, status_to_xml(text))

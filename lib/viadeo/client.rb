@@ -9,11 +9,11 @@ module Viadeo
     include Api::UpdateMethods
     include Search
 
-    attr_reader :consumer_token, :consumer_secret, :consumer_options
+    attr_reader :client_api_id, :client_api_secret, :consumer_options, :token
 
-    def initialize(ctoken=Viadeo.token, csecret=Viadeo.secret, options={})
-      @consumer_token   = ctoken
-      @consumer_secret  = csecret
+    def initialize(client_api_id, client_api_secret, options={})
+      @client_api_id   = client_api_id
+      @client_api_secret   = client_api_secret
       @consumer_options = options
     end
 

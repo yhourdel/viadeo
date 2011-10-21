@@ -3,33 +3,29 @@ module Viadeo
 
     module QueryMethods
 
-      def profile(options={})
-        path = person_path(options)
-        simple_query(path, options)
+      def profile(access_token)
+      	Mash.from_json simple_query(access_token, "/me", {})
       end
 
-      def connections(options={})
-        path = "#{person_path(options)}/connections"
-        simple_query(path, options)
-      end
-
-      def network_updates(options={})
-        path = "#{person_path(options)}/network/updates"
-        simple_query(path, options)
-      end
+			def search_user(access_token, args)
+				args = {} if args.nil?
+				Mash.from_json simple_query(access_token, "/search/users", args)
+			end
 
       private
 
-        def simple_query(path, options={})
-          fields = options[:fields] || Viadeo.default_profile_fields
-
-          if options[:public]
-            path +=":public"
-          elsif fields
-            path +=":(#{fields.map{ |f| f.to_s.gsub("_","-") }.join(',')})"
-          end
-
-          Mash.from_json(get(path))
+        def simple_query(access_token, path, args)
+        	url = "#{DEFAULT_OAUTH_OPTIONS[:api_base]}#{path}?access_token=#{access_token}"
+        	args.each {|key, value| url += "&#{key}=#{value}"}
+			    uri = URI.parse(url)
+			    connection = Net::HTTP.new(uri.host, 443)
+			 	  connection.use_ssl = true
+		 	   	connection.verify_mode = OpenSSL::SSL::VERIFY_NONE
+		 	   	resp = connection.request_get(uri.path + '?' + uri.query)
+		 	   	if resp.code != '200'
+		  	 		raise "web service error"
+			    end
+			    return resp.body
         end
 
         def person_path(options)

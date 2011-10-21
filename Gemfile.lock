@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    linkedin (0.1.0)
+    viadeo (0.1.0)
       hashie (~> 1.1.0)
       multi_json (~> 1.0.3)
       oauth (~> 0.4.5)
@@ -42,10 +42,10 @@ PLATFORMS
 DEPENDENCIES
   jruby-openssl (~> 0.7)
   json (~> 1.6)
-  linkedin!
   rake (~> 0.9)
   rdoc (~> 3.8)
   rspec (~> 2.6)
   simplecov (~> 0.5)
   vcr (~> 1.10)
+  viadeo!
   webmock (~> 1.7)
