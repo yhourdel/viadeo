@@ -4,17 +4,16 @@ module Viadeo
     module QueryMethods
 
       def profile(access_token)
-      	Mash.from_json simple_query(access_token, "/me", {})
+      	simple_query(access_token, "/me", {})
       end
 
 			def search_user(access_token, args)
 				args = {} if args.nil?
-				Mash.from_json simple_query(access_token, "/search/users", args)
+				simple_query(access_token, "/search/users", args)
 			end
 
-      private
 
-        def simple_query(access_token, path, args)
+     	def simple_query(access_token, path, args)
         	url = "#{DEFAULT_OAUTH_OPTIONS[:api_base]}#{path}?access_token=#{access_token}"
         	args.each {|key, value| url += "&#{key}=#{value}"}
 			    uri = URI.parse(url)
@@ -25,8 +24,8 @@ module Viadeo
 		 	   	if resp.code != '200'
 		  	 		raise "web service error"
 			    end
-			    return resp.body
-        end
+			   return Mash.from_json resp.body
+	     end
 
         def person_path(options)
           path = "/people/"
