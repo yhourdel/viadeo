@@ -16,8 +16,9 @@ module Viadeo
      	def simple_query(access_token, path, args)
         url = "#{DEFAULT_OAUTH_OPTIONS[:api_base]}#{path}?access_token=#{access_token}"
         args.each {|key, value| url += "&#{key}=#{value}"}
+        logger.debug "!        " + url.inspect + "       !"
 			  uri = URI.parse(CGI.escape(url))
-			  (0..2).each do
+			  (1..3).each do
 					connection = Net::HTTP.new(uri.host, 443)
 				 	connection.use_ssl = true
 			 	  connection.verify_mode = OpenSSL::SSL::VERIFY_NONE
