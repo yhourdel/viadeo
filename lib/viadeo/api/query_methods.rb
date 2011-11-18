@@ -26,7 +26,7 @@ module Viadeo
 					rescue
 						puts "Error: #{$!}"
 						return nil
-					end				 	 
+					end
 					return Mash.from_json resp.body if resp.code == '200'
 				end
 				return nil
