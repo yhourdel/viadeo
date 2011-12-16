@@ -32,6 +32,26 @@ module Viadeo
 				return nil
 			end
 
+     	def simple_post_query(access_token, path, args)
+        url = "#{DEFAULT_OAUTH_OPTIONS[:api_base]}#{path}?access_token=#{access_token}"
+        post_args = ""
+        args.each {|key, value| url += "&#{key}=#{CGI.escape(value.to_s)}"}
+			  uri = URI.parse(url)
+			  (1..3).each do
+					connection = Net::HTTP.new(uri.host, 443)
+				 	connection.use_ssl = true
+			 	  connection.verify_mode = OpenSSL::SSL::VERIFY_NONE
+				  begin
+				 	  resp = connection.request_post(uri.path + '?' + uri.query, post_args)
+					rescue
+						puts "Error: #{$!}"
+						return nil
+					end
+					return Mash.from_json resp.body if resp.code == '200'
+				end
+				return nil
+			end
+
         def person_path(options)
           path = "/people/"
           if options[:id]
