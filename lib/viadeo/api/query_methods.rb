@@ -28,6 +28,7 @@ module Viadeo
 						return nil
 					end
 					return Mash.from_json resp.body if resp.code == '200'
+					puts resp.code
 				end
 				return nil
 			end
