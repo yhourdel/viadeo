@@ -14,6 +14,7 @@ module Viadeo
 
 
      	def simple_query(access_token, path, args)
+     		puts "SIMPLE QUERY"
         url = "#{DEFAULT_OAUTH_OPTIONS[:api_base]}#{path}?access_token=#{access_token}"
         args.each {|key, value| url += "&#{key}=#{CGI.escape(value.to_s)}"}
 			  uri = URI.parse(url)
