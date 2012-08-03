@@ -23,9 +23,9 @@ module Viadeo
 				connection.use_ssl = true
 				connection.verify_mode = OpenSSL::SSL::VERIFY_NONE
 				resp = connection.request_get(uri.path + '?' + uri.query)
-				return Mash.from_json resp if resp.code == '200'
+				return Mash.from_json resp.body if resp.code == '200'
 			end			
-			return Mash.from_json resp
+			return Mash.from_json resp.body
 		end
 
      	def simple_post_query(access_token, path, args)
@@ -39,9 +39,9 @@ module Viadeo
 			 	connection.use_ssl = true
 				connection.verify_mode = OpenSSL::SSL::VERIFY_NONE
 				resp = connection.request_post(uri.path + '?' + uri.query, post_args)
-				return Mash.from_json resp if resp.code == '200'
+				return Mash.from_json resp.body if resp.code == '200'
 			end
-			return Mash.from_json resp
+			return Mash.from_json resp.body
 		end
 
         def person_path(options)
