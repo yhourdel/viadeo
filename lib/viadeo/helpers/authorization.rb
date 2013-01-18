@@ -1,11 +1,6 @@
 module Viadeo
   module Helpers
-
     module Authorization
-
-			def self.test_method()
-				"WORKLOOOL"
-			end
 
 			def grant_token(code, client_api_id, client_api_secret, redirect_uri)
 				url = "#{DEFAULT_OAUTH_OPTIONS[:token_url]}?code=#{code}&grant_type=authorization_code&client_id=#{client_api_id}&client_secret=#{client_api_secret}&response_type=code&redirect_uri=#{redirect_uri}"
@@ -76,6 +71,5 @@ module Viadeo
         end
 
     end
-
   end
 end

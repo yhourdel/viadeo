@@ -12,11 +12,11 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'simplecov', '>= 0.5'
   gem.add_development_dependency 'vcr', '>= 1.10'
   gem.add_development_dependency 'webmock', '>= 1.7'
-  gem.authors = [""]
-  gem.description = %q{Ruby wrapper for the LinkedIn API}
+  gem.authors = ["Gaël Flores", "Yann Hourdel"]
+  gem.description = %q{Ruby wrapper for the Viadeo API}
   gem.email = ['']
   gem.files = `git ls-files`.split("\n")
-  gem.homepage = 'http://github.com/pengwynn/linkedin'
+  gem.homepage = 'http://github.com/yhourdel/viadeo'
   gem.name = 'viadeo'
   gem.require_paths = ['lib']
   gem.summary = gem.description

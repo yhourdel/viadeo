@@ -1,6 +1,5 @@
 module Viadeo
   module Helpers
-
     module Request
 
       DEFAULT_HEADERS = {
@@ -83,7 +82,7 @@ module Viadeo
           end
           uri.to_s
         end
+      
     end
-
   end
 end
