@@ -12,6 +12,8 @@ module Viadeo
       end
 
       def simple_query(access_token, path, args)
+        puts "simple_query(#{access_token}, #{path}, #{args})"
+
         url = "#{DEFAULT_OAUTH_OPTIONS[:api_base]}#{path}?access_token=#{access_token}"
         args.each {|key, value| url += "&#{key}=#{CGI.escape(value.to_s)}"}
         uri = URI.parse(url)
@@ -20,10 +22,15 @@ module Viadeo
         connection.use_ssl = true
         connection.verify_mode = OpenSSL::SSL::VERIFY_NONE
         resp = connection.request_get(uri.path + '?' + uri.query)
+
+        puts "Viadeo :: resp=#{resp.inspect}"
+
         return Mash.from_json resp.body
       end
 
       def simple_post_query(access_token, path, args)
+        puts "simple_post_query(#{access_token}, #{path}, #{args})"
+
         url = "#{DEFAULT_OAUTH_OPTIONS[:api_base]}#{path}?access_token=#{access_token}"
         post_args = ""
         args.each {|key, value| url += "&#{key}=#{CGI.escape(value.to_s)}"}
@@ -33,6 +40,9 @@ module Viadeo
         connection.use_ssl = true
         connection.verify_mode = OpenSSL::SSL::VERIFY_NONE
         resp = connection.request_post(uri.path + '?' + uri.query, post_args)
+
+        puts "Viadeo :: resp=#{resp.inspect}"
+
         return Mash.from_json resp.body
       end
 
