@@ -28,18 +28,17 @@ module Viadeo
         return Mash.from_json resp.body
       end
 
-      def simple_post_query(access_token, path, args)
+      def simple_post_query(access_token, path, args, post_data = "")
         puts "simple_post_query(#{access_token}, #{path}, #{args})"
 
         url = "#{DEFAULT_OAUTH_OPTIONS[:api_base]}#{path}?access_token=#{access_token}"
-        post_args = ""
         args.each {|key, value| url += "&#{key}=#{CGI.escape(value.to_s)}"}
         uri = URI.parse(url)
         resp = nil
         connection = Net::HTTP.new(uri.host, 443)
         connection.use_ssl = true
         connection.verify_mode = OpenSSL::SSL::VERIFY_NONE
-        resp = connection.request_post(uri.path + '?' + uri.query, post_args)
+        resp = connection.request_post(uri.path + '?' + uri.query, post_data)
 
         puts "Viadeo :: resp=#{resp.inspect}"
 
