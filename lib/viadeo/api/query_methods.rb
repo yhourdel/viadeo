@@ -38,6 +38,11 @@ module Viadeo
         connection = Net::HTTP.new(uri.host, 443)
         connection.use_ssl = true
         connection.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+        if !post_data.respond_to?(:bytesize) && post_data.respond_to?(:map)
+          post_data = post_data.map { |k, v| "#{CGI.escape(k.to_s)}=#{CGI.escape(v.to_s)}" }.join('&')
+        end
+
         resp = connection.request_post(uri.path + '?' + uri.query, post_data)
 
         puts "Viadeo :: resp=#{resp.inspect}"
